@@ -136,15 +136,25 @@ export function Header({
             <Link href="/wishlist" aria-label={`Wishlist${wishes ? `, ${wishes} saved` : ""}`}>
               <HeartIcon />
             </Link>
-            <Link href="/contact" aria-label="Write to the house">
+            <Link className="account-link" href="/contact" aria-label="Write to the house">
               <UserIcon />
             </Link>
             <Link className="bag-icon" href="/bag" aria-label={`Bag, ${count} items`}>
               <BagIcon />
               <em>{count}</em>
             </Link>
-            <button className="menu-btn" type="button" aria-expanded={mobile} onClick={() => setMobile((value) => !value)}>
-              {mobile ? "Close" : "Menu"}
+            <button
+              className="menu-btn"
+              type="button"
+              aria-label={mobile ? "Close menu" : "Open menu"}
+              aria-expanded={mobile}
+              onClick={() => {
+                setMobile((value) => !value);
+                setSearchOpen(false);
+                setMega(false);
+              }}
+            >
+              {mobile ? <CloseIcon /> : <MenuIcon />}
             </button>
           </div>
         </div>
@@ -286,6 +296,20 @@ export function Header({
   );
 }
 
+function MenuIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
 function Caret() {
   return (
     <svg viewBox="0 0 12 8" aria-hidden="true">
