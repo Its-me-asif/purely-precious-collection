@@ -7,10 +7,10 @@ import { ProductRail } from "@/components/ProductRail";
 import { catalogCover, readDB, sortedCatalogs } from "@/lib/store";
 
 const occasions = [
-  { name: "Wedding", href: "/collections/bridal", image: "/looks/haar.jpg", alt: "A gold haar with a pearl drop." },
-  { name: "Office", href: "/collections/rings", image: "/looks/studs.jpg", alt: "A gold solitaire stud." },
-  { name: "Daily", href: "/collections/necklaces", image: "/looks/pendant.jpg", alt: "A small gold pendant on a fine chain." },
-  { name: "Festive", href: "/collections/earrings", image: "/looks/jhumka.jpg", alt: "A gold jhumka with a pearl." },
+  { name: "Wedding", href: "/collections/bridal", image: "/looks/haar.jpg", alt: "A woman wearing a gold haar." },
+  { name: "Office", href: "/collections/rings", image: "/looks/studs.jpg", alt: "A woman wearing gold studs." },
+  { name: "Daily", href: "/collections/necklaces", image: "/looks/pendant.jpg", alt: "A woman wearing a gold pendant." },
+  { name: "Festive", href: "/collections/earrings", image: "/looks/jhumka.jpg", alt: "A woman wearing gold jhumkas." },
 ];
 
 const edits = [
@@ -45,7 +45,7 @@ export default function HomePage() {
         slides={[
           {
             image: "/looks/hero.jpg",
-            alt: "Layered gold necklaces.",
+            alt: "A woman wearing layered gold necklaces.",
             kicker: "Purely Precious Collection",
             title: "Not just jewellery.",
             line: "A feeling you wear.",
@@ -53,7 +53,7 @@ export default function HomePage() {
           },
           {
             image: "/looks/haar.jpg",
-            alt: "A gold bridal haar.",
+            alt: "A woman wearing a gold bridal haar.",
             kicker: "Bridal edit",
             title: "Worn for the day.",
             line: "Then kept.",
@@ -61,7 +61,7 @@ export default function HomePage() {
           },
           {
             image: "/looks/pearls.jpg",
-            alt: "Layered pearls on a gold chain.",
+            alt: "A woman wearing layered pearls.",
             kicker: "The pearl edit",
             title: "Quiet layers.",
             line: "Made for every day.",
@@ -113,14 +113,14 @@ export default function HomePage() {
           <h2 className="block-title">Offers and edits</h2>
           <div className="offer-grid">
             <Link href="/collections/bridal">
-              <img src="/looks/haar.jpg" alt="A gold haar." />
+              <img src="/looks/haar.jpg" alt="A woman in a gold haar." />
               <span>
                 <em>Bridal</em>
                 <strong>Festive edit</strong>
               </span>
             </Link>
             <Link href="/collections">
-              <img src="/looks/hero.jpg" alt="Layered gold necklaces." />
+              <img src="/looks/hero.jpg" alt="A woman in layered gold necklaces." />
               <span>
                 <em>From the house</em>
                 <strong>Everyday gold</strong>
@@ -155,21 +155,21 @@ export default function HomePage() {
           <p className="block-sub">Three ways into the collection.</p>
           <div className="metal-grid">
             <Link href="/collections/necklaces">
-              <img src="/looks/pendant.jpg" alt="A gold pendant." />
+              <img src="/looks/pendant.jpg" alt="A woman wearing a gold pendant." />
               <span>
                 <strong>Gold</strong>
                 Explore
               </span>
             </Link>
             <Link href="/products/pearl-layer-chain">
-              <img src="/looks/pearls.jpg" alt="A pearl cluster on gold." />
+              <img src="/looks/pearls.jpg" alt="A woman wearing pearls." />
               <span>
                 <strong>Pearl</strong>
                 Explore
               </span>
             </Link>
             <Link href="/collections/bridal">
-              <img src="/looks/jhumka.jpg" alt="A gold jhumka." />
+              <img src="/looks/jhumka.jpg" alt="A woman wearing gold jhumkas." />
               <span>
                 <strong>Bridal</strong>
                 Explore

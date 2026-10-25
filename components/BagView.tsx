@@ -81,13 +81,7 @@ export function BagView() {
         ) : (
           lines.map((line) => (
             <div className="bag-line" key={line.productId}>
-              {line.product.images[0] ? (
-                <span className="bag-photo">
-                  <img src={line.product.images[0]} alt="" />
-                </span>
-              ) : (
-                <span />
-              )}
+              {line.product.images[0] ? <img src={line.product.images[0]} alt="" /> : <span />}
               <div>
                 <h2 style={{ fontSize: 28, color: "var(--brown)" }}>{line.product.name}</h2>
                 <p className="price">{inr(line.product.price)}</p>

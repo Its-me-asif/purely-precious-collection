@@ -195,8 +195,7 @@
   width: 100%;
   height: 620px;
   object-fit: cover;
-  object-position: center 72%;
-  transform: none;
+  object-position: center 20%;
 }
 .hero-copy {
   position: absolute;
@@ -575,7 +574,7 @@ body { overflow-x: clip; }
   .hero-tabs { gap: 8px; padding: 12px 12px 0; flex-wrap: wrap; }
   .pill { padding: 8px 14px; }
   .hero-stage { min-height: 0; }
-  .hero-stage img { height: min(78vh, 560px); }
+  .hero-stage img { height: min(78vh, 560px); object-position: center 18%; }
   .hero-copy {
     inset: auto 0 0 0;
     width: 100%;
@@ -635,91 +634,6 @@ body { overflow-x: clip; }
 }
 @media (min-width: 1100px) {
   .shelf { grid-template-columns: repeat(4, 1fr); }
-}
-
-.occasion-row a,
-.edit-row a,
-.offer-grid a,
-.metal-grid a,
-.cat-photo,
-.deal-media,
-.pdp-stage,
-.media,
-.thumbs button,
-.bag-photo {
-  overflow: hidden;
-}
-.bag-photo { display: block; width: 92px; height: 112px; }
-.bag-photo img { width: 100%; height: 100%; object-fit: cover; }
-
-img[src*="pendant.jpg"] {
-  object-position: center 100%;
-  transform: scale(2.05);
-  transform-origin: center 100%;
-}
-img[src*="pearls.jpg"] {
-  object-position: center 76%;
-  transform: scale(1.8);
-  transform-origin: center 74%;
-}
-img[src*="hero.jpg"] {
-  object-position: center 80%;
-  transform: scale(1.7);
-  transform-origin: center 82%;
-}
-img[src*="haar.jpg"] {
-  object-position: center 70%;
-  transform: scale(1.72);
-  transform-origin: center 68%;
-}
-img[src*="studs.jpg"] {
-  object-position: 86% 40%;
-  transform: scale(2);
-  transform-origin: 84% 40%;
-}
-img[src*="hoops.jpg"] {
-  object-position: 70% 36%;
-  transform: scale(2.05);
-  transform-origin: 68% 34%;
-}
-img[src*="jhumka.jpg"] {
-  object-position: 82% 46%;
-  transform: scale(2.35);
-  transform-origin: 80% 44%;
-}
-img[src*="signet.jpg"] {
-  object-position: 40% 46%;
-  transform: scale(1.55);
-  transform-origin: 38% 44%;
-}
-img[src*="bands.jpg"] {
-  object-position: 36% 40%;
-  transform: scale(1.6);
-  transform-origin: 34% 38%;
-}
-img[src*="cuff.jpg"] {
-  object-position: 18% 72%;
-  transform: scale(2.35);
-  transform-origin: 16% 78%;
-}
-img[src*="anklet.jpg"] {
-  object-position: 42% 58%;
-  transform: scale(1.55);
-  transform-origin: 40% 55%;
-}
-.hero-stage img[src*="hero.jpg"] { object-position: center 88%; transform: none; }
-.hero-stage img[src*="haar.jpg"] { object-position: center 64%; transform: none; }
-.hero-stage img[src*="pearls.jpg"] { object-position: center 72%; transform: none; }
-@media (max-width: 860px) {
-  .hero-stage img[src*="haar.jpg"],
-  .hero-stage img[src*="pearls.jpg"] {
-    transform: scale(1.35);
-    transform-origin: center 70%;
-  }
-  .hero-stage img[src*="hero.jpg"] {
-    transform: scale(1.65);
-    transform-origin: center 86%;
-  }
 }
 
 .gate {
