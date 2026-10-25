@@ -1,0 +1,242 @@
+import fs from "fs";
+import path from "path";
+import { unstable_noStore as noStore } from "next/cache";
+import type { Catalog, DB, Product } from "./types";
+import { slugify } from "./slug";
+
+const file = path.join(process.cwd(), "data", "db.json");
+
+function seed(): DB {
+  const catalogs: Catalog[] = [
+    {
+      id: "cat-necklaces",
+      name: "Necklaces",
+      slug: "necklaces",
+      description: "Chains and pendants cut to sit against the collarbone.",
+      image: "/looks/pendant.jpg",
+      sort: 1,
+    },
+    {
+      id: "cat-earrings",
+      name: "Earrings",
+      slug: "earrings",
+      description: "Studs and hoops light enough to forget, until the light catches them.",
+      image: "/looks/hoops.jpg",
+      sort: 2,
+    },
+    {
+      id: "cat-rings",
+      name: "Rings",
+      slug: "rings",
+      description: "Bands and signets shaped for hands that are actually in use.",
+      image: "/looks/signet.jpg",
+      sort: 3,
+    },
+    {
+      id: "cat-bracelets",
+      name: "Bracelets",
+      slug: "bracelets",
+      description: "A single line for the wrist, made to stack or to stand alone.",
+      image: "/looks/cuff.jpg",
+      sort: 4,
+    },
+    {
+      id: "cat-bridal",
+      name: "Bridal",
+      slug: "bridal",
+      description: "Ceremony pieces with the same calm as the everyday edit.",
+      image: "/looks/haar.jpg",
+      sort: 5,
+    },
+  ];
+
+  const products: Product[] = [
+    {
+      id: "p-lune",
+      name: "Lune Pendant",
+      slug: "lune-pendant",
+      catalogId: "cat-necklaces",
+      price: 14800,
+      metal: "18k gold vermeil on sterling silver",
+      description: "A small round pendant on a fine trace chain, meant to sit at the base of the throat.",
+      details: "Chain 18 inches, with a 2 inch extender. Lobster clasp. Wipe with a soft cloth and keep perfume off the stone setting.",
+      images: ["/looks/pendant.jpg"],
+      featured: true,
+      available: true,
+      createdAt: "2026-10-02T10:00:00.000Z",
+    },
+    {
+      id: "p-pearl-layer",
+      name: "Pearl Layer Chain",
+      slug: "pearl-layer-chain",
+      catalogId: "cat-necklaces",
+      price: 9600,
+      metal: "Freshwater pearl, gold vermeil",
+      description: "Three pearls in a short fall, for wearing alone or over a finer chain.",
+      details: "Shortest strand sits at 16 inches. Pearls are individually knotted. Store flat, away from other metal.",
+      images: ["/looks/pearls.jpg"],
+      featured: true,
+      available: true,
+      createdAt: "2026-10-04T10:00:00.000Z",
+    },
+    {
+      id: "p-studs",
+      name: "Solitaire Studs",
+      slug: "solitaire-studs",
+      catalogId: "cat-earrings",
+      price: 7200,
+      metal: "Cubic zirconia, gold vermeil on silver",
+      description: "A pair of quiet studs with a low setting, so they sit close and do not catch.",
+      details: "Butterfly backs included, plus a silicone pair for long wear. Post length 11 mm.",
+      images: ["/looks/studs.jpg"],
+      featured: true,
+      available: true,
+      createdAt: "2026-10-06T10:00:00.000Z",
+    },
+    {
+      id: "p-hoops",
+      name: "Crescent Hoops",
+      slug: "crescent-hoops",
+      catalogId: "cat-earrings",
+      price: 8400,
+      metal: "Gold vermeil on sterling silver",
+      description: "Medium hoops with a smooth inner edge, weighted so they hang straight.",
+      details: "Inner diameter 28 mm. Hinged clasp. Suitable for daily wear once the piercing has healed.",
+      images: ["/looks/hoops.jpg"],
+      featured: false,
+      available: true,
+      createdAt: "2026-10-08T10:00:00.000Z",
+    },
+    {
+      id: "p-signet",
+      name: "Signet Pearl Ring",
+      slug: "signet-pearl-ring",
+      catalogId: "cat-rings",
+      price: 6800,
+      metal: "Freshwater pearl, gold vermeil",
+      description: "A flat signet face with one pearl, made to be worn on the index or the little finger.",
+      details: "Made to a standard size M. Note your size when you reserve and we will confirm the fit.",
+      images: ["/looks/signet.jpg"],
+      featured: true,
+      available: true,
+      createdAt: "2026-10-10T10:00:00.000Z",
+    },
+    {
+      id: "p-twin",
+      name: "Twin Band",
+      slug: "twin-band",
+      catalogId: "cat-rings",
+      price: 11200,
+      metal: "Gold vermeil on sterling silver",
+      description: "Two slim bands that cross once, so the hand still looks bare from a distance.",
+      details: "Bands are fixed together. Size M. Avoid chlorine and keep the piece dry overnight.",
+      images: ["/looks/bands.jpg"],
+      featured: false,
+      available: true,
+      createdAt: "2026-10-12T10:00:00.000Z",
+    },
+    {
+      id: "p-cuff",
+      name: "Oval Link Cuff",
+      slug: "oval-link-cuff",
+      catalogId: "cat-bracelets",
+      price: 9900,
+      metal: "Gold vermeil on sterling silver",
+      description: "An open cuff with a soft oval line. It slips on and stays put without a clasp.",
+      details: "Opening is gentle and can be adjusted once by hand. Inner length about 6.5 inches.",
+      images: ["/looks/cuff.jpg"],
+      featured: true,
+      available: true,
+      createdAt: "2026-10-14T10:00:00.000Z",
+    },
+    {
+      id: "p-haar",
+      name: "Temple Petal Haar",
+      slug: "temple-petal-haar",
+      catalogId: "cat-bridal",
+      price: 42000,
+      metal: "Gold vermeil, freshwater pearl",
+      description: "A long layered haar drawn from temple jewellery, kept lighter than the ceremony pieces it remembers.",
+      details: "Ties at the back with a silk cord. The drop sits at the sternum. Reserve early for wedding dates.",
+      images: ["/looks/haar.jpg"],
+      featured: true,
+      available: true,
+      createdAt: "2026-10-18T10:00:00.000Z",
+    },
+    {
+      id: "p-jhumka",
+      name: "Bridal Jhumka",
+      slug: "bridal-jhumka",
+      catalogId: "cat-bridal",
+      price: 18600,
+      metal: "Gold vermeil, freshwater pearl",
+      description: "A pair of bells with a single pearl beneath, proportioned for a long evening.",
+      details: "Hook fittings. Each jhumka weighs under 8 grams. A clutch back is included.",
+      images: ["/looks/jhumka.jpg"],
+      featured: false,
+      available: true,
+      createdAt: "2026-10-20T10:00:00.000Z",
+    },
+  ];
+
+  return {
+    settings: {
+      announcement: "Pieces are reserved on request. We confirm every order by phone.",
+      phone: "",
+      email: "",
+      instagram: "",
+      city: "",
+      about:
+        "Purely Precious Collection is jewellery for days that are not waiting for an occasion. Each piece is considered for how it sits, how it layers, and how it feels at the end of the day. Gold, pearl, and stone — kept quiet on purpose.",
+    },
+    catalogs,
+    products,
+    orders: [],
+    messages: [],
+  };
+}
+
+function write(db: DB) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const tmp = `${file}.tmp`;
+  fs.writeFileSync(tmp, JSON.stringify(db, null, 2));
+  fs.renameSync(tmp, file);
+}
+
+export function readDB(): DB {
+  noStore();
+  if (!fs.existsSync(file)) {
+    const db = seed();
+    write(db);
+    return db;
+  }
+  const raw = fs.readFileSync(file, "utf8");
+  return JSON.parse(raw) as DB;
+}
+
+export function updateDB(change: (db: DB) => void): DB {
+  const db = readDB();
+  change(db);
+  write(db);
+  return db;
+}
+
+export function uniqueSlug(db: DB, name: string, kind: "catalogs" | "products") {
+  const base = slugify(name);
+  let slug = base;
+  let n = 2;
+  while (db[kind].some((item) => item.slug === slug)) {
+    slug = `${base}-${n++}`;
+  }
+  return slug;
+}
+
+export function catalogCover(db: DB, catalog: Catalog) {
+  if (catalog.image) return catalog.image;
+  const piece = db.products.find((product) => product.catalogId === catalog.id && product.available && product.images[0]);
+  return piece?.images[0] || "";
+}
+
+export function sortedCatalogs(db: DB) {
+  return [...db.catalogs].sort((a, b) => a.sort - b.sort || a.name.localeCompare(b.name));
+}
